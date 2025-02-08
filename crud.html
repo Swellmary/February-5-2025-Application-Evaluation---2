@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="crud.css">
+    <title>Front-End CRUD</title>
+</head>
+<body>
+    <header>
+        <h2 class="logo">CRUD Without Database</h2>
+    </header>
+
+    <section class="crud-header">
+        <table class="list">
+            <thead>
+                <tr>
+                    <th class="name">Name</th>
+                    <th class="address">Address</th>
+                    <th class="phoneNumber">Phone</th>
+                    <th class="date">Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="data-table">
+                <!-- Added data will be inserted here -->
+            </tbody>
+        </table>
+    </section>
+
+    <section class="crud-input">
+        <h2>Fill Up Form</h2>
+        <form id="crud-form">
+            <input type="text" id="name" placeholder="Name" required />
+            <input type="text" id="address" placeholder="Address" required />
+            <input type="tel" id="phone" placeholder="Phone" required />
+            <input type="date" id="date" required />
+            <button type="submit">Add</button>
+        </form>
+    </section>
+
+    <script>
+        const form = document.getElementById('crud-form');
+        const tableBody = document.getElementById('data-table');
+        let editRow = null;
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+
+            if (editRow) {
+                updateRow(name, address, phone, date);
+            } else {
+                addRow(name, address, phone, date);
+            }
+            
+            form.reset();
+        });
+
+        function addRow(name, address, phone, date) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${name}</td>
+                <td>${address}</td>
+                <td>${phone}</td>
+                <td>${date}</td>
+                <td class="edit-delete">
+                    <button onclick="editRowData(this)">Edit</button>
+                    <button onclick="deleteRow(this)">Delete</button>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        }
+
+        function editRowData(button) {
+            const row = button.parentElement.parentElement;
+            editRow = row;
+            document.getElementById('name').value = row.cells[0].innerText;
+            document.getElementById('address').value = row.cells[1].innerText;
+            document.getElementById('phone').value = row.cells[2].innerText;
+            document.getElementById('date').value = row.cells[3].innerText;
+        }
+
+        function updateRow(name, address, phone, date) {
+            editRow.cells[0].innerText = name;
+            editRow.cells[1].innerText = address;
+            editRow.cells[2].innerText = phone;
+            editRow.cells[3].innerText = date;
+            editRow = null;
+        }
+
+        function deleteRow(button) {
+            const row = button.parentElement.parentElement;
+            tableBody.removeChild(row);
+        }
+    </script>
+</body>
+</html>

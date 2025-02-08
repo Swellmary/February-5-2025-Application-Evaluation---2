@@ -1,0 +1,65 @@
+* {
+    margin: 0.2rem;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* || HEADER  */
+
+header h2 {
+    padding: 2rem;
+    background-color: white;
+    margin-top: 1rem;
+    box-shadow: 0 4px 10px rgba(146, 146, 146, 0.3);
+}
+
+/* || TABLE */
+
+.crud-header {
+    float: left;
+    clear: both;
+    margin: 2rem 0 0 1rem;
+}
+
+.crud-header table {
+    border-collapse: collapse;
+    min-width: none;
+    width: 65vw;
+}
+
+th {
+    background-color: rgb(225, 224, 224);
+}
+
+th, td {
+    border: 1px solid #949494;
+    padding: 0.5rem;
+}
+
+.edit-delete {
+    text-align: center;
+}
+
+
+/* || FORM */
+
+.crud-input {
+    border: 1px solid #949494;
+    width: 30vw;
+    float: left;
+    margin: 2rem 0 0 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+}
+
+input {
+    padding: 0.5rem;
+}
+
+.crud-input h2 {
+    padding: 0.5rem;
+}
